@@ -4,10 +4,25 @@
 </template>
 
 <script>
+import Datepicker from 'vuejs-datepicker'
+import { addDays } from '../utils/index'
 export default {
   name: 'Home',
   data () {
-    return {}
+    return {
+      startDate: new Date(),
+      numberOfDay: 0,
+      countryCode: '',
+      endDate: new Date()
+    }
+  },
+  methods: {
+    calculateEndDays () {
+      return addDays(this.startDate, this.numberOfDay)
+    }
+  },
+  components: {
+    Datepicker
   }
 }
 </script>
