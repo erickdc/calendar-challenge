@@ -14,7 +14,7 @@
             <input v-model="countryCode" placeholder="Country Code" class="form-control">
           </div>
            <div class="form-group center">
-            <datepicker class="finalDate" v-if="startDate" name="finalDate" :value="endDate"
+            <datepicker class="finalDate" v-if="startDate" name="finalDate" :value="startDate"
             :minimumView="'day'" :maximumView="'day'" :disabledDates="disabledDates" :inline="true"
             :bootstrap-styling="true"></datepicker>
            </div>
