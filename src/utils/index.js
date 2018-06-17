@@ -3,3 +3,9 @@ export function addDays (dateToAdd, amount) {
   dat.setDate(dat.getDate() + amount)
   return dat
 }
+
+export function dateWithoutTime (fullDate) {
+  var dat = new Date(fullDate.getTime())
+  dat.setHours(0, 0, 0, 0)
+  return dat
+}

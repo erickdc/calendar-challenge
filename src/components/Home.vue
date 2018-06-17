@@ -1,29 +1,29 @@
 <template>
-  <form>
+  <form class="center">
 
            <div class="form-group">
-            <label for="startDate">Start Date: </label><div class="center">
-              <datepicker name="startDate" v-model="startDate"></datepicker>
-            </div>
+            <label for="startDate">Start Date: </label>
+              <datepicker name="startDate" v-model="startDate" :bootstrap-styling="true"></datepicker>
            </div>
           <div class="form-group">
               <label for="numberOfDays">Number of days: </label>
-            <input name="numberOfDays" v-model.number="numberOfDay" type="number" placeholder="Number of days" min="0">
+            <input name="numberOfDays" v-model.number="numberOfDay" type="number" placeholder="Number of days" min="0" class="form-control">
           </div>
           <div class="form-group">
               <label for="startDate">Country Code: </label>
-            <input v-model="countryCode" placeholder="Country Code">
+            <input v-model="countryCode" placeholder="Country Code" class="form-control">
           </div>
-           <div class="center">
+           <div class="form-group center">
             <datepicker class="finalDate" v-if="startDate" name="finalDate" :value="endDate"
-            :minimumView="'day'" :maximumView="'day'" :disabledDates="disabledDates" inline="true" ></datepicker>
+            :minimumView="'day'" :maximumView="'day'" :disabledDates="disabledDates" :inline="true"
+            :bootstrap-styling="true"></datepicker>
            </div>
   </form>
 </template>
 
 <script>
 import Datepicker from 'vuejs-datepicker'
-import { addDays } from '../utils/index'
+import { addDays, dateWithoutTime } from '../utils/index'
 export default {
   name: 'Home',
   data () {
@@ -46,9 +46,11 @@ export default {
     disabledDates: function () {
       return {
         customPredictor: (date) => {
-          if (date < this.startDate || date > this.endDate) {
-            return true
-          }
+          const currentDateWithoutTime = dateWithoutTime(date)
+          const startDateWithoutTime = dateWithoutTime(this.startDate)
+          const endDateWithoutTime = dateWithoutTime(this.endDate)
+          return currentDateWithoutTime < startDateWithoutTime ||
+          currentDateWithoutTime > endDateWithoutTime
         }
       }
     }
@@ -84,20 +86,20 @@ a {
    border: 1px solid black;
 }
 .finalDate .vdp-datepicker__calendar .weekend {
-  background: yellow;
+  background: #F3F905;
 }
 .finalDate .vdp-datepicker__calendar {
-  background: green;
+  background: #BCDD94;
 }
 .finalDate .vdp-datepicker__calendar .disabled {
-  background: grey;
-  color: grey;
+  background: #CCCCCC;
+  color: #CCCCCC;
 }
 .finalDate .vdp-datepicker__calendar .blank {
-  background: grey;
+  background:#CCCCCC;
 }
 .center {
-    margin: auto;
-    width: 17%;
+    margin: 0 auto;
+    width: 50%
 }
 </style>
